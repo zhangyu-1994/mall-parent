@@ -7,4 +7,6 @@ public interface UmsAdminService {
     String userLogin(UmsAdmin umsAdmin);
     //通过用户名获取用户信息
     UmsAdmin getUmsAdminByUserName(String userName);
+    //从token中获取用户信息
+    UmsAdmin getAdminInfo(String token);
 }

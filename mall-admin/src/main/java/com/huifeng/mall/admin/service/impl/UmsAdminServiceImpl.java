@@ -4,10 +4,12 @@ import com.huifeng.mall.admin.bean.UmsAdmin;
 import com.huifeng.mall.admin.mapper.UmsAdminMapper;
 import com.huifeng.mall.admin.service.UmsAdminService;
 import com.huifeng.mall.admin.utils.JwtTokenUtil;
+import io.jsonwebtoken.Claims;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 @Service
@@ -42,5 +44,16 @@ public class UmsAdminServiceImpl implements UmsAdminService {
             return ums;
         }
         return null;
+    }
+
+    //从token中获取用户信息
+    @Override
+    public UmsAdmin getAdminInfo(String token) {
+        Claims claims = jwtTokenUtil.getClaimsByToken(token, "zy");
+        LinkedHashMap umsAdminMap = (LinkedHashMap)claims.get("UmsAdmin");
+        String username = (String)umsAdminMap.get("username");
+        UmsAdmin umsAdmin = new UmsAdmin();
+        umsAdmin.setUsername(username);
+        return umsAdmin;
     }
 }

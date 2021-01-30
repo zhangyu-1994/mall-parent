@@ -20,13 +20,6 @@
             <artifactId>mall-common</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
-        <!-- 解决java.lang.ClassNotFoundException: javax.xml.bind.DatatypeConverter问题  -->
-
-        <!--<dependency>
-            <groupId>javax.xml.bind</groupId>
-            <artifactId>jaxb-api</artifactId>
-            <version>2.3.1</version>
-        </dependency>-->
 
     </dependencies>
 

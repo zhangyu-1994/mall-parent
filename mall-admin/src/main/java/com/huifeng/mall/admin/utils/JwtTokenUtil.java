@@ -1,5 +1,6 @@
 package com.huifeng.mall.admin.utils;
 
+import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
@@ -51,5 +52,21 @@ public class JwtTokenUtil {
      */
     private Date generateExpirationDate() {
         return new Date(System.currentTimeMillis() + expiration * 1000);
+    }
+
+    /**
+     * 从token中取出用户数据
+     * @param token
+     */
+    public Claims getClaimsByToken(String token,String solt){
+        Claims claims = null;
+        if(solt!=null||solt!=""){
+            secret+=solt;
+        }
+        claims = Jwts.parser()
+                .setSigningKey(secret)
+                .parseClaimsJws(token)
+                .getBody();
+        return claims;
     }
 }

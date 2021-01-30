@@ -11,25 +11,16 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 @EnableSwagger2
 @Configuration
-public class Swagger2Config {
-    @Bean
-    public Docket webApiConfig(){
-
-        return new Docket(DocumentationType.SWAGGER_2)
-                .groupName("UserAdminApi")
-                .apiInfo(webApiInfo())
-                .select()
-                .build();
-
-    }
-
-    private ApiInfo webApiInfo(){
-
-        return new ApiInfoBuilder()
-                .title("网站-后台管理API文档")
-                .description("本文档描述了后台管理服务接口定义")
+public class Swagger2Config extends BaseSwaggerConfig{
+    @Override
+    public SwaggerProperties swaggerProperties() {
+        return SwaggerProperties.builder()
+                .apiBasePackage("com.macro.mall.controller")
+                .title("mall后台系统")
+                .description("mall后台相关接口文档")
+                .contactName("macro")
                 .version("1.0")
-                .contact(new Contact("汇峰", "http://huifeng.com", "1285110683@qq.com"))
+                .enableSecurity(true)
                 .build();
     }
 }
